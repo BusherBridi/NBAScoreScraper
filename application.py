@@ -5,7 +5,10 @@ from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as ureq
 
 application = app = Flask(__name__)
-
+@app.route("/")
+def index():
+    return ("NBA_SCRAPER")
+    
 @app.route("/<string:team>", methods = ["GET"])
 def getScores(team):
     url = "https://www.cbssports.com/nba/gametracker/boxscore/NBA_20200806_" + team + '/'
