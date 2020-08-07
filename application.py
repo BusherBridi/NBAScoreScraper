@@ -10,7 +10,7 @@ application = app = Flask(__name__)
 def index():
     return ("NBA_SCRAPER")
     
-@app.route("/<string:team>", methods = ["GET"])
+@app.route("/score/<string:team>", methods = ["GET"])
 def getScores(team):
     today = date.today() # Get today's date
     url_formated_date = today.strftime("%Y%m%d")
