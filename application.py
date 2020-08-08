@@ -20,8 +20,8 @@ def index():
     
 @app.route("/score/<string:team>", methods = ["GET"])
 def getScores(team):
-    today = date.today() # Get today's date
-    url_formated_date = str(today.strftime("%Y%m%d"))
+    now = date.now() # Get date now
+    url_formated_date = str(now.strftime("%Y%m%d"))
     url = str("https://www.cbssports.com/nba/gametracker/boxscore/NBA_"+url_formated_date+"_" + team + '/')
     return(url) 
     # page_soup = soupify(url)
