@@ -6,7 +6,6 @@ from urllib.request import urlopen as ureq
 from datetime import date
 
 application = app = Flask(__name__)
-
 # Function to soupify a page
 def soupify(url):
     uclient = ureq(url)
@@ -28,6 +27,13 @@ def getScores(team):
     home_score = scores[0].text
     away_score = scores[1].text
     return jsonify({"home_score":home_score,"away_score":away_score})
+
+@app.route("/standings/<string:standings>", methods = ["GET"])
+def getStandings(standings):
+    url = "https://www.cbssports.com/nba/standings/"
+    page_soup = soupify(url)
+    standings = page_soup.findAll("div", {"class": "TableBase-1"})
+    
 
 
 # @app.route("/schedule", methods = ["GET"])
