@@ -46,6 +46,13 @@ def getSchedule():
     except:
         return jsonify({"games":liveGame}), 200
     numberOfLiveGames = len(liveGame) / 4
-    games = [liveGame[x:x+4] for x in range(0, len(liveGame), 100)]
-   # return str(liveGame[0].div.text)
-    return str(games)
+    games = [liveGame[x:x+4] for x in range(0, len(liveGame), 4)]
+    gameInfo = {}
+    i = 0
+    for game in games:
+        gameInfo[i]['away_team']['name'] = game[0]
+        # gameInfo[f'game_{i}']['away_team']['abv'] = game[1]
+        # gameInfo[f'game_{i}']['home_team']['name'] = game[2]
+        # gameInfo[f'game_{i}']['home_team']['abv'] = game[3]
+        i = i+1
+    return str(gameInfo)
