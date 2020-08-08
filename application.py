@@ -25,9 +25,6 @@ def getScores(team):
     page_soup = soup(page_html, "html.parser")
     return page_soup
 
-@app.route("/")
-def index():
-    return("NBA SCORE SCRAPER")
 
 @app.route("/score/<string:team>", methods = ["GET"])
 def getScores(team):
