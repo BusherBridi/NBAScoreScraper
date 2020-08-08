@@ -22,12 +22,11 @@ def getScores(team):
     now = date.now() # Get date now
     url_formated_date = str(now.strftime("%Y%m%d"))
     url = str("https://www.cbssports.com/nba/gametracker/boxscore/NBA_"+url_formated_date+"_" + team + '/')
-    return(url) 
-    # page_soup = soupify(url)
-    # scores = page_soup.findAll("div",{"class":"score-text"})
-    # home_score = scores[0].text
-    # away_score = scores[1].text
-    # return jsonify({"home_score":home_score,"away_score":away_score})
+    page_soup = soupify(url)
+    scores = page_soup.findAll("div",{"class":"score-text"})
+    home_score = scores[0].text
+    away_score = scores[1].text
+    return jsonify({"home_score":home_score,"away_score":away_score})
 
 # @app.route("/standings/<string:standings>", methods = ["GET"])
 # def getStandings(standings):
