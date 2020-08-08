@@ -29,11 +29,11 @@ def getScores(team):
     # away_score = scores[1].text
     # return jsonify({"home_score":home_score,"away_score":away_score})
 
-@app.route("/standings/<string:standings>", methods = ["GET"])
-def getStandings(standings):
-    url = "https://www.cbssports.com/nba/standings/"
-    page_soup = soupify(url)
-    standings = page_soup.findAll("div", {"class": "TableBase-1"})
+# @app.route("/standings/<string:standings>", methods = ["GET"])
+# def getStandings(standings):
+#     url = "https://www.cbssports.com/nba/standings/"
+#     page_soup = soupify(url)
+#     standings = page_soup.findAll("div", {"class": "TableBase-1"})
     
 
 
