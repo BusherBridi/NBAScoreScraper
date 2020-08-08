@@ -13,7 +13,11 @@ def soupify(url):
     page_soup = soup(page_html, "html.parser")
     return page_soup
 
-@app.route("/<string:team>", methods = ["GET"])
+@app.route("/")
+def index():
+    return("NBA SCORE SCRAPER")
+
+@app.route("/score/<string:team>", methods = ["GET"])
 def getScores(team):
     url = "https://www.cbssports.com/nba/gametracker/boxscore/NBA_20200806_" + team + '/'
     page_soup = soupify(url)
@@ -25,4 +29,17 @@ def getScores(team):
 @app.route("/schedule", methods = ["GET"])
 def getSchedule():
     url = "https://www.msn.com/en-us/Sports/nba/schedule"
-    page_soup = soupify(url)
+    liveGame = "No Live Games"
+    try:
+        page_soup = soupify(url)
+        liveGame = page_soup.find("div",{"id":"live"}).findAll("td",{"class":"teamname"})
+    except:
+        return jsonify({"games":liveGame}), 200
+    numberOfLiveGames = len(liveGame) / 4
+    it = iter(liveGame)
+    onGoingGames = {}
+    gameId = 0
+    for x in it:
+        onGoingGames = {""}
+   # return str(liveGame[0].div.text)
+    return str(liveGame)
