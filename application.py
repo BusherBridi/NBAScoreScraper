@@ -50,9 +50,6 @@ def getSchedule():
     gameInfo = {}
     i = 0
     for game in games:
-        gameInfo[i]['away_team']['name'] = game[0]
-        # gameInfo[f'game_{i}']['away_team']['abv'] = game[1]
-        # gameInfo[f'game_{i}']['home_team']['name'] = game[2]
-        # gameInfo[f'game_{i}']['home_team']['abv'] = game[3]
+        gameInfo[f'game_{i}'] = {'away_team':game[0].text.replace('\n',' '), 'away_abv':game[1].text.replace('\n',' '), 'home_team':game[2].text.replace('\n',' '), 'home_abv':game[3].text.replace('\n',' ')}
         i = i+1
-    return str(gameInfo)
+    return jsonify(gameInfo)
