@@ -19,8 +19,8 @@ def index():
     
 @app.route("/score/<string:team>", methods = ["GET"])
 def getScores(team):
-    now = date.now() # Get date now
-    url_formated_date = str(now.strftime("%Y%m%d"))
+    today = date.today() # Get date now
+    url_formated_date = str(today.strftime("%Y%m%d"))
     url = str("https://www.cbssports.com/nba/gametracker/boxscore/NBA_"+url_formated_date+"_" + team + '/')
     page_soup = soupify(url)
     scores = page_soup.findAll("div",{"class":"score-text"})
@@ -28,12 +28,6 @@ def getScores(team):
     away_score = scores[1].text
     return jsonify({"home_score":home_score,"away_score":away_score})
 
-# @app.route("/standings/<string:standings>", methods = ["GET"])
-# def getStandings(standings):
-#     url = "https://www.cbssports.com/nba/standings/"
-#     page_soup = soupify(url)
-#     standings = page_soup.findAll("div", {"class": "TableBase-1"})
-    
 
 
 @app.route("/schedule", methods = ["GET"])
@@ -53,3 +47,4 @@ def getSchedule():
         gameInfo[f'game_{i}'] = {'away_team':game[0].text.replace('\n',' '), 'away_abv':game[1].text.replace('\n',' '), 'home_team':game[2].text.replace('\n',' '), 'home_abv':game[3].text.replace('\n',' ')}
         i = i+1
     return jsonify(gameInfo)
+
