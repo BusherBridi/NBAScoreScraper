@@ -43,6 +43,7 @@ def getSchedule():
         gameInfo = {'number_of_live_games':number_of_live_games}
         return gameInfo
     numberOfLiveGames = len(liveGame) / 4
+    gameInfo['number_of_live_games'] = numberOfLiveGames
     games = [liveGame[x:x+4] for x in range(0, len(liveGame), 4)]
     i = 0
     for game in games:
