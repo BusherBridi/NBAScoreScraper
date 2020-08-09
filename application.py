@@ -36,20 +36,20 @@ def getScores(team):
     
 
 
-# @app.route("/schedule", methods = ["GET"])
-# def getSchedule():
-#     url = "https://www.msn.com/en-us/Sports/nba/schedule"
-#     liveGame = "No Live Games"
-#     try:
-#         page_soup = soupify(url)
-#         liveGame = page_soup.find("div",{"id":"live"}).findAll("td",{"class":"teamname"})
-#     except:
-#         return jsonify({"games":liveGame}), 200
-#     numberOfLiveGames = len(liveGame) / 4
-#     it = iter(liveGame)
-#     onGoingGames = {}
-#     gameId = 0
-#     for x in it:
-#         onGoingGames = {""}
-#    # return str(liveGame[0].div.text)
-#     return str(liveGame)
+@app.route("/schedule", methods = ["GET"])
+def getSchedule():
+    url = "https://www.msn.com/en-us/Sports/nba/schedule"
+    liveGame = "No Live Games"
+    try:
+        page_soup = soupify(url)
+        liveGame = page_soup.find("div",{"id":"live"}).findAll("td",{"class":"teamname"})
+    except:
+        return jsonify({"games":liveGame}), 200
+    numberOfLiveGames = len(liveGame) / 4
+    games = [liveGame[x:x+4] for x in range(0, len(liveGame), 4)]
+    gameInfo = {}
+    i = 0
+    for game in games:
+        gameInfo[f'game_{i}'] = {'away_team':game[0].text.replace('\n',' '), 'away_abv':game[1].text.replace('\n',' '), 'home_team':game[2].text.replace('\n',' '), 'home_abv':game[3].text.replace('\n',' ')}
+        i = i+1
+    return jsonify(gameInfo)
