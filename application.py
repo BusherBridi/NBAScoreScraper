@@ -51,3 +51,10 @@ def getSchedule():
         i = i+1
     return jsonify(gameInfo)
 
+@app.route("/standings", methods = ["GET"])
+def getStandings():
+    url = "https://www.cbssports.com/nba/standings/"
+    page_soup = soupify(url)
+    standings = page_soup.find('table')[0] #should return first table, in this case ECF
+    return jsonify(standings)
+    
