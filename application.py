@@ -52,6 +52,6 @@ def getSchedule():
 def getStandings():
     url = "https://www.cbssports.com/nba/standings/"
     page_soup = soupify(url)
-    standings = page_soup.find('table')[0] #should return first table, in this case ECF
-    return jsonify(standings)
+    standings = page_soup.findAll('table')[0] # should return first table, in this case ECF
+    return str(standings)
     
